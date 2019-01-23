@@ -17,22 +17,19 @@ namespace pass
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public string reg(string password, string kpass)
         {
-            string login = textBox1.Text;
-            string Email = textBox2.Text;
             string Password = textBox3.Text;
-            string kpass = textBox4.Text;
             int g = 0;
             if (Password != kpass)
             {
-                MessageBox.Show("Пароли не совпадают");
                 g++;
+                return "Пароли не совпадают";
             }
             if (Password.Length < 6 || Password.Length > 18)
             {
-                MessageBox.Show("Длина символов пароля недостаточна или превышает лимит");
                 g++;
+                return "Длина символов пароля недостаточна или превышает лимит";
             }
             if (Password.Contains('0') | Password.Contains('1') | Password.Contains('2') | Password.Contains('3') | Password.Contains('4') | Password.Contains('5') | Password.Contains('6') | Password.Contains('7') | Password.Contains('8') | Password.Contains('9'))
             {
@@ -40,8 +37,8 @@ namespace pass
             }
             else
             {
-                MessageBox.Show("В пароле должны присутствовать цифры");
                 g++;
+                return "В пароле должны присутствовать цифры";
             }
             if (Password.Contains('*') | Password.Contains('&') | Password.Contains('{') | Password.Contains('}') | Password.Contains('|') | Password.Contains('+') | Password.Contains('.'))
             {
@@ -49,22 +46,34 @@ namespace pass
             }
             else
             {
-                MessageBox.Show("Отсутсвует обязательный символ из допустимого набора: * & { } | + .");
                 g++;
+                return "Отсутсвует обязательный символ из допустимого набора: * & { } | + .";
             }
             for (int i = 0; i < Password.Length - 2; i++)
             {
                 if (Password[i] == Password[i + 1] && Password[i + 1] == Password[i + 2])
                 {
-                    MessageBox.Show("Не должно присутствовать 3 повторных символов");
                     g++;
-                    return;
+                    return "Не должно присутствовать 3 повторных символов";
+
+
                 }
             }
             if (g == 0)
             {
-                MessageBox.Show("Вы зарегестрированы");
+                return "Вы зарегестрированы";
             }
+                else 
+            { return "Вы не зареганы"; }
+            
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string login = textBox1.Text;
+            string Email = textBox2.Text;
+            string Password = textBox3.Text;
+            string kpass = textBox4.Text;
+            int g = 0;
         }
     }
 }
